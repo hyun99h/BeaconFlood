@@ -5,32 +5,32 @@ from struct import *
 
 class RadiotapHeader :
     def __init__(self) :
-        self.Header_revision = b'\x00'                                  # 1 byte
-        self.Header_pad = b'\x00'                                       # 1 byte
-        self.Header_length = pack('h', 24)                              # 2 byte
-        self.Present_flags_word = b'\x2e\x40\x00\xa0\x20\x08\x00\x00'   # 8 byte
-        self.Flags = b'\x00'                                            # 1 byte
-        self.Data_rate = b'\x02'                                        # 1 byte
-        self.Channel_frequency = pack('h', 2412)                        # 2 byte
-        self.Channel_flags = b'\x00\xa0'                                # 2 byte
-        self.Antenna_signal1 = pack('h', -57)                           # 2 byte
-        self.RX_flags = b'\x00\x00'                                     # 2 byte
-        self.Antenna_signal2 = self.Antenna_signal1                     # 2 byte
+        self.Header_revision = b'\x00'                                      # 1 byte
+        self.Header_pad = b'\x00'                                           # 1 byte
+        self.Header_length = pack('h', 24)                                  # 2 byte
+        self.Present_flags_word = b'\x2e\x40\x00\xa0\x20\x08\x00\x00'       # 8 byte
+        self.Flags = b'\x00'                                                # 1 byte
+        self.Data_rate = b'\x02'                                            # 1 byte
+        self.Channel_frequency = pack('h', 2412)                            # 2 byte
+        self.Channel_flags = b'\x00\xa0'                                    # 2 byte
+        self.Antenna_signal1 = pack('h', -35)                               # 2 byte
+        self.RX_flags = b'\x00\x00'                                         # 2 byte
+        self.Antenna_signal2 = self.Antenna_signal1                         # 2 byte
 
 class BeaconFrameHeader :
     def __init__(self, num) :
-        self.Frame_control = b'\x80\x00'                            # 2 byte, 08 = beacon frame
-        self.Duration = b'\x00\x00'                                 # 2 byte
-        self.Ds_address = b'\xff\xff\xff\xff\xff\xff'               # 6 byte, Broadcast
-        self.Ts_address = b'\x88\x36\x6c\xf0\xcd' + pack('b', num)  # 6 byte, AP MAC Address
-        self.BSS_id = self.Ts_address                               # 6 byte
-        self.Sequence_number = pack('h', 1234)                      # 2 byte
+        self.Frame_control = b'\x80\x00'                                    # 2 byte, 08 = beacon frame
+        self.Duration = b'\x00\x00'                                         # 2 byte
+        self.Ds_address = b'\xff\xff\xff\xff\xff\xff'                       # 6 byte, Broadcast
+        self.Ts_address = b'\x88\x36\x6c\xf0\xcd' + pack('b', num)          # 6 byte, AP MAC Address
+        self.BSS_id = self.Ts_address                                       # 6 byte
+        self.Sequence_number = pack('h', 1234)                              # 2 byte
     
 class BeaconFixedParameter :
     def __init__(self) :
-        self.Timestamp = b'\xee\x61\x67\x40\xca\x00\x00\x00'    # 8 byte
-        self.Beacon_interval = b'\x64\x00'                      # 2 byte
-        self.Capabilities_info = b'\x14\x11'                    # 2 byte
+        self.Timestamp = b'\xee\x61\x67\x40\xca\x00\x00\x00'                # 8 byte
+        self.Beacon_interval = b'\x64\x00'                                  # 2 byte
+        self.Capabilities_info = b'\x14\x11'                                # 2 byte
 
 class BeaconTaggedParameter :
     def __init__(self, SSID) :
