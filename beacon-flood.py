@@ -19,12 +19,12 @@ class RadiotapHeader :
 
 class BeaconFrameHeader :
     def __init__(self, num) :
-        self.Frame_control = b'\x80\x00'                # 2 byte, 08 = beacon frame
-        self.Duration = b'\x00\x00'                     # 2 byte
-        self.Ds_address = b'\xff\xff\xff\xff\xff\xff'   # 6 byte, Broadcast
-        self.Ts_address = b'\x88\x36\x6c\xf0\xcd' + pack('b', num)   # 6 byte, AP MAC Address
-        self.BSS_id = self.Ts_address                   # 6 byte
-        self.Sequence_number = pack('h', 1234)          # 2 byte
+        self.Frame_control = b'\x80\x00'                            # 2 byte, 08 = beacon frame
+        self.Duration = b'\x00\x00'                                 # 2 byte
+        self.Ds_address = b'\xff\xff\xff\xff\xff\xff'               # 6 byte, Broadcast
+        self.Ts_address = b'\x88\x36\x6c\xf0\xcd' + pack('b', num)  # 6 byte, AP MAC Address
+        self.BSS_id = self.Ts_address                               # 6 byte
+        self.Sequence_number = pack('h', 1234)                      # 2 byte
     
 class BeaconFixedParameter :
     def __init__(self) :
@@ -34,20 +34,21 @@ class BeaconFixedParameter :
 
 class BeaconTaggedParameter :
     def __init__(self, SSID) :
-        self.SSID_Num = b'\x00'
-        self.SSID_Length = pack('b', len(SSID.encode('utf-8')))
-        self.SSID = SSID.encode('utf-8')
-        self.Supported_rate = b'\x01\x08\x82\x84\x8b\x96\x24\x30\x48\x6c'
-        self.DS_Param_set = b'\x03'
-        self.DS_Length = b'\x01'
-        self.DS_Channel = b'\x0b'
+        self.SSID_Num = b'\x00'                                             # 1 byte
+        self.SSID_Length = pack('b', len(SSID.encode('utf-8')))             # 1 byte
+        self.SSID = SSID.encode('utf-8')                                    # SSID
+        self.Supported_rate = b'\x01\x08\x82\x84\x8b\x96\x24\x30\x48\x6c'   # 10 byte
+        self.DS_Param_set = b'\x03'                                         # 1 byte
+        self.DS_Length = b'\x01'                                            # 1 byte
+        self.DS_Channel = b'\x0b'                                           # 1 byte
+
 
 if len(sys.argv) !=  3:
-    print("syntax : beacon-flood <interface> <ssid-list-file>")
+    print("syntax : sudo python3 beacon-flood <interface> <ssid-list-file>")
     sys.exit()
 interface_name = str(sys.argv[1])
 file_name = str(sys.argv[2])
-# 인터페이스 명 지정
+# 인터페이스 명 및 파일 명 지정
 
 f = open(file_name, 'r')
 SSID_list = []
