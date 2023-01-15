@@ -44,7 +44,7 @@ class BeaconTaggedParameter :
 
 
 if len(sys.argv) !=  3:
-    print("syntax : sudo python3 beacon-flood <interface> <ssid-list-file>")
+    print("syntax : sudo python3 beacon-flood.py <interface> <ssid-list-file>")
     sys.exit()
 interface_name = str(sys.argv[1])
 file_name = str(sys.argv[2])
